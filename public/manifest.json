@@ -2,13 +2,12 @@
 
   "manifest_version": 2,
   "name": "WebSocketSniff",
-  "version": "0.1",
+  "version": "0.2",
   "author": "Rinat",
   "homepage_url": "https://hellosite.org",
   "description": "Sniff websocket frames",
   "icons": {
     "48": "icons/websocket_50.png",
-    "50": "icons/websocket_50.png",
     "64": "icons/websocket_64.png",
     "128": "icons/websocket_128.png"
   },

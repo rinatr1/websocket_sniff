@@ -40,8 +40,8 @@ function create_js()
 	
 	
 
-	var real_socket = window.WebSocket;
-	
+		                            var real_socket = window.WebSocket;
+
 	var WebSocket = window.WebSocket = function(uri)
 	{
 		this.websocket = new real_socket(uri);
@@ -59,17 +59,17 @@ function create_js()
 	};
 
 	WebSocket.prototype.send = function(data) {
-		
+
 
 		// First create the event
 		let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
-			{
-				detail:
-					{
-						data: data,
-						obj: this.websocket
-					}
-			}
+		                                        {
+			                                        detail:
+				                                        {
+					                                        data: data,
+					                                        obj: this.websocket
+				                                        }
+		                                        }
 		);
 
 		document.body.dispatchEvent(ws_sniff_debug_to);
@@ -79,35 +79,35 @@ function create_js()
 
 	WebSocket.prototype.onOpen = function(e)
 	{
-	
+
 
 		// First create the event
 		let ws_sniff_debug_open = new CustomEvent("ws_sniff_debug_open",
-			{
-				detail:
-					{
-						data: arguments,
-						obj: this.websocket
-					}
-			}
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: arguments,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
 		);
 
 		this.listeners.onopen(e);
 	}
 
 	WebSocket.prototype.onMessage = function(e){
-		
+
 
 
 		// First create the event
 		let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
-			{
-				detail:
-					{
-						data: e.data,
-						obj: this.websocket
-					}
-			}
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: e.data,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
 		);
 
 		document.body.dispatchEvent(ws_sniff_debug_from);
@@ -152,11 +152,11 @@ function create_js()
 
 	Object.defineProperty(WebSocket.prototype, 'onerror', {
 		get: function() {
-			
+
 			return this.websocket.onerror;
 		},
 		set: function(fn) {
-		
+
 			this.websocket.onerror = fn;
 		}
 	});
@@ -175,7 +175,7 @@ document.body.addEventListener("ws_sniff_debug_to", function(e)
 
 	browser.runtime.sendMessage({
 		type: "to_websocket",
-		message: JSON.stringify(e.detail.data),
+		message: e.detail.data,
 		url: e.detail.obj.url
 	});
 
@@ -188,7 +188,7 @@ document.body.addEventListener("ws_sniff_debug_from", function(e)
 
 	browser.runtime.sendMessage({
 		type: "from_websocket",
-		message: JSON.stringify(e.detail.data),
+		message: e.detail.data,
 		url: e.detail.obj.url
 
 	});
@@ -202,7 +202,7 @@ document.body.addEventListener("ws_sniff_debug_open", function(e)
 
 	browser.runtime.sendMessage({
 		type: "notify-attached-tab",
-		message: JSON.stringify(e.detail.data),
+		message:e.detail.data,
 		url: e.detail.obj.url
 	});
 

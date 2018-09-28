@@ -1,0 +1,182 @@
+
+.grid
+{
+  >.min
+  {
+    width: 65%;
+  }
+}
+
+.tools {
+  position: fixed;
+
+  background: white;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  left: 0;
+  right: 0;
+/*  transform: translateX(-35%);*/
+/*  outline: 1px solid red;*/
+  align-items:center;
+  justify-content:center;
+
+}
+
+.wrap {
+  display: flex;
+  width: 100%;
+
+  flex-flow: row nowrap;
+
+}
+
+.cell {
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  flex:0;
+  margin-left: 20px;
+  margin-right: 20px;
+
+
+}
+
+#websocket_log_table {
+
+  border-collapse: collapse;
+  padding: 0;
+  margin-top: 80px;
+  width: 100%;
+
+  .from_devtools
+  {
+    background-color: #ffff4f;
+  }
+
+  .row
+  {
+    &:hover {
+      background-color: #FFFFFF;
+      color: #000000;
+      .data {
+        cursor: pointer;
+        border: 1px silver dashed;
+/*        &:before{
+          padding: 4px 15px 3px 15px;
+          content: 'show full';
+          position: absolute;
+          right: -150px;
+
+          background: #2e2e2e;
+          color: white;
+          border-radius: 5px;
+          height: 20px;
+        }*/
+      }
+
+    }
+
+  }
+
+
+}
+
+
+
+.row {
+  display: flex;
+  width: 100%;
+  background-color: #EBEBEB;
+  color: #000000;
+  margin: 0;
+  height: 30px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.header {
+
+  color: #000000;
+  background-color: #D4D4D4;
+  font-size: 12px;
+  height: 30px;
+  width: 100%;
+  margin-top: 2px;
+
+}
+
+
+
+
+.row > div {
+  border: solid 1px #C9C9C9;
+  font-size: 12px;
+  text-align: center;
+
+  align-items:center;
+  justify-content:center;
+  align-content: stretch;
+}
+
+.type {
+  width: 40px;
+  display: flex;
+  flex-grow: 0
+
+
+}
+
+.time {
+  display: flex;
+  width: 150px;
+  flex-grow: 0
+}
+
+
+.data {
+  display: flex;
+  flex-grow: 1
+}
+/*.data {
+  align-items:center;
+  justify-content:center;
+  flex: 1;
+}*/
+
+.length {
+  width: 100px;
+  display: flex;
+  flex-grow: 0
+}
+
+
+
+
+
+.min
+{
+  width: 100%;
+}
+
+
+#app{
+  .min
+  {
+    width: 100%;
+
+    .min{
+      width: 65%;
+    }
+  }
+
+}
+.max
+{
+  width: 100%;
+}
+
+.clear_all
+{
+  flex: 1;
+}

@@ -3,23 +3,21 @@
  tab.
  */
 function handleMessage(request, sender, sendResponse) {
-    let myPort;
     switch (request.type) {
         case 'from_websocket':
-
-            myPort = browser.runtime.connect({name: "from_websocket"});
+            var myPort = browser.runtime.connect({name: "from_websocket"});
             myPort.postMessage(request);
             break;
 
         case 'to_websocket':
 
-            myPort = browser.runtime.connect({name: "to_websocket"});
+            var myPort = browser.runtime.connect({name: "to_websocket"});
             myPort.postMessage(request);
             break;
 
         case 'open_websocket':
 
-            myPort = browser.runtime.connect({name: "open_websocket"});
+            var myPort = browser.runtime.connect({name: "open_websocket"});
             myPort.postMessage(request);
             break;
 

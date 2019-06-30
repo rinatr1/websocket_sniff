@@ -62,7 +62,7 @@ function createJS(callback) {
 	  {
 		  detail:
 			  {
-				  data: msg.data,
+				  data: msg,
 				  obj: this.websocket
 			  }
 	  }
@@ -141,7 +141,6 @@ function createJS(callback) {
     });
     sending.then(
         function(msg) {
-            console.log(msg.response, msg.response === false)
             if (msg.response === "off") {
                 callback(undefined);
             } else {
@@ -157,7 +156,6 @@ function createJS(callback) {
 
 
 document.body.addEventListener("ws_sniff_debug_to", function (e) {
-    console.log("ws_sniff_debug_to");
     browser.runtime.sendMessage({
         type: "to_websocket",
         message: e.detail.data,
@@ -168,8 +166,6 @@ document.body.addEventListener("ws_sniff_debug_to", function (e) {
 });
 
 document.body.addEventListener("ws_sniff_debug_from", function (e) {
-    console.log("ws_sniff_debug_from");
-
     browser.runtime.sendMessage({
         type: "from_websocket",
         message: e.detail.data,

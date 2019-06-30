@@ -157,7 +157,7 @@ function createJS(callback) {
 
 
 document.body.addEventListener("ws_sniff_debug_to", function (e) {
-
+    console.log("ws_sniff_debug_to");
     browser.runtime.sendMessage({
         type: "to_websocket",
         message: e.detail.data,
@@ -168,6 +168,7 @@ document.body.addEventListener("ws_sniff_debug_to", function (e) {
 });
 
 document.body.addEventListener("ws_sniff_debug_from", function (e) {
+    console.log("ws_sniff_debug_from");
 
     browser.runtime.sendMessage({
         type: "from_websocket",
@@ -181,7 +182,7 @@ document.body.addEventListener("ws_sniff_debug_from", function (e) {
 
 document.body.addEventListener("ws_sniff_debug_open", function (e) {
     browser.runtime.sendMessage({
-        type: "notify-attached-tab",
+        type: "open_websocket",
         message: e.detail.data,
         url: e.detail.obj.url
     });

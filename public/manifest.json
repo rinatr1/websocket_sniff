@@ -1,5 +1,4 @@
 {
-
   "manifest_version": 2,
   "name": "WebSocketSniff (fork)",
   "version": "0.2",
@@ -11,7 +10,6 @@
     "64": "icons/websocket_64.png",
     "128": "icons/websocket_128.png"
   },
-
   "applications": {
     "gecko": {
       "id": "hello@hellosite.org",
@@ -19,23 +17,26 @@
     }
   },
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": [
+      "js/background.js"
+    ]
   },
-
   "permissions": [
     "webRequest",
     "<all_urls>",
     "webRequestBlocking"
   ],
-
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["devtools/ws_sniffer.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "devtools/ws_sniffer.js"
+      ],
       "run_at": "document_end"
     }
   ],
-
   "devtools_page": "devtools/devtools-page.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 }

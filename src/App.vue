@@ -1,15 +1,15 @@
 <template>
 
 
-  <div id="app">
-    <ws_grid
-      :ws_data="ws_data"
-      @remove_all="remove_all"
-      @ws_send="ws_send"
-    />
+    <div id="app">
+        <ws_grid
+                :ws_data="ws_data"
+                @remove_all="remove_all"
+                @ws_send="ws_send"
+        />
 
 
-  </div>
+    </div>
 </template>
 
 <script>

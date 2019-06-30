@@ -1,45 +1,40 @@
 var real_socket = window.WebSocket;
 
 
-try
-{
-	var th = document.getElementsByTagName("head")[0];
-	s      = create_js();
-	th.insertBefore(s, th.firstChild);
+try {
+    var th = document.getElementsByTagName("head")[0];
+    s = create_js();
+    th.insertBefore(s, th.firstChild);
 
-}
-catch (err)
-{
+} catch (err) {
 
-	try
-	{   var th = document.getElementsByTagName("head")[0];
-		s      = create_js();
-		th.insertBefore(s, th.firstChild);
+    try {
+        var th = document.getElementsByTagName("head")[0];
+        s = create_js();
+        th.insertBefore(s, th.firstChild);
 
 
-		var th = document.getElementsByTagName("body")[0];
-		s      = create_js();
-		th.insertBefore(s, th.firstChild);
+        var th = document.getElementsByTagName("body")[0];
+        s = create_js();
+        th.insertBefore(s, th.firstChild);
 
-	} catch (err)
-	{
-		s = create_js();
-		document.insertBefore(s, document.firstElementChild);
-	}
+    } catch (err) {
+        s = create_js();
+        document.insertBefore(s, document.firstElementChild);
+    }
 
 }
 
 
-function create_js()
-{
+function create_js() {
 
-	var s = document.createElement('script');
-	s.setAttribute('type', 'text/javascript');
+    var s = document.createElement('script');
+    s.setAttribute('type', 'text/javascript');
 
 
-	//https://gist.github.com/jeffdrumgod/d2bc277658ac4d94d802b99363a7efce
+    //https://gist.github.com/jeffdrumgod/d2bc277658ac4d94d802b99363a7efce
 
- s.text = `
+    s.text = `
  	(function debugify_content_script(){
   var nativeWebSocket = window.WebSocket;
   var requests = window.requestLog = {}; 
@@ -133,49 +128,49 @@ function create_js()
     }
   });
 })();`;
-	return s;
+    return s;
 
 }
 
-function handleResponse(e) {}
-function handleError(e) {}
+function handleResponse(e) {
+}
+
+function handleError(e) {
+}
 
 
-document.body.addEventListener("ws_sniff_debug_to", function (e)
-{
+document.body.addEventListener("ws_sniff_debug_to", function (e) {
 
-	var sending = browser.runtime.sendMessage({
-		                            type: "to_websocket",
-		                            message: e.detail.data,
-		                            url: e.detail.obj.url
-	                            });
-	sending.then(handleResponse, handleError);
-
-
-});
-
-document.body.addEventListener("ws_sniff_debug_from", function (e)
-{
-
-	var sending = browser.runtime.sendMessage({
-		                            type: "from_websocket",
-		                            message: e.detail.data,
-		                            url: e.detail.obj.url
-
-	                            });
-	sending.then(handleResponse, handleError);
+    var sending = browser.runtime.sendMessage({
+        type: "to_websocket",
+        message: e.detail.data,
+        url: e.detail.obj.url
+    });
+    sending.then(handleResponse, handleError);
 
 
 });
 
-document.body.addEventListener("ws_sniff_debug_open", function (e)
-{
-	var sending = browser.runtime.sendMessage({
-		                            type: "notify-attached-tab",
-		                            message: e.detail.data,
-		                            url: e.detail.obj.url
-	                            });
-	sending.then(handleResponse, handleError);
+document.body.addEventListener("ws_sniff_debug_from", function (e) {
+
+    var sending = browser.runtime.sendMessage({
+        type: "from_websocket",
+        message: e.detail.data,
+        url: e.detail.obj.url
+
+    });
+    sending.then(handleResponse, handleError);
+
+
+});
+
+document.body.addEventListener("ws_sniff_debug_open", function (e) {
+    var sending = browser.runtime.sendMessage({
+        type: "notify-attached-tab",
+        message: e.detail.data,
+        url: e.detail.obj.url
+    });
+    sending.then(handleResponse, handleError);
 
 });
 

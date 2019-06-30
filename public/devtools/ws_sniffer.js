@@ -41,11 +41,9 @@ function create_js()
 
  s.text = `
  	(function debugify_content_script(){
-  console.log('debugify content script running');
   var nativeWebSocket = window.WebSocket;
   var requests = window.requestLog = {}; 
   var WebSocket = window.WebSocket = function(uri) {
-    console.log('new WebSocket created', uri);
     this.websocket = new nativeWebSocket(uri);
     this.websocket.onopen = this.onOpen.bind(this);
     this.websocket.onmessage = this.onMessage.bind(this);
@@ -139,12 +137,8 @@ function create_js()
 
 }
 
-function handleResponse(e) {
-	console.log("handleResponse", e);
-}
-function handleError(e) {
-	console.log("handleError", e);
-}
+function handleResponse(e) {}
+function handleError(e) {}
 
 
 document.body.addEventListener("ws_sniff_debug_to", function (e)

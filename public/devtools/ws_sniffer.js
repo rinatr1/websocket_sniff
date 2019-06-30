@@ -48,7 +48,6 @@ function create_js() {
     window._openWebSockets.push(this);
   };
   WebSocket.prototype.send = function(msg) {
-    console.log('>>', msg);
   	let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
 	  {
 		  detail:
@@ -62,7 +61,6 @@ function create_js() {
     this.websocket.send.apply(this.websocket, arguments);
   };
   WebSocket.prototype.onOpen = function(e){
-    console.log('OPEN', arguments);
   	let ws_sniff_debug_open = new CustomEvent("ws_sniff_debug_open",
 	  {
 		  detail:
@@ -76,7 +74,6 @@ function create_js() {
     this.listeners.onopen(e);
   };
   WebSocket.prototype.onMessage = function(e){
-    console.log('<<', e.data);
   	let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
 	  {
 		  detail:

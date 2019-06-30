@@ -2,41 +2,37 @@
  When we receive the message, execute the given script in the given
  tab.
  */
-function handleMessage(request, sender, sendResponse)
-{
+function handleMessage(request, sender, sendResponse) {
+    let myPort;
+    switch (request.type) {
+        case 'from_websocket':
 
+            myPort = browser.runtime.connect({name: "from_websocket"});
+            myPort.postMessage(request);
+            break;
 
-	switch (request.type)
-	{
-		case 'from_websocket':
+        case 'to_websocket':
 
-			var myPort = browser.runtime.connect({name: "from_websocket"});
-			myPort.postMessage(request);
-			break;
+            myPort = browser.runtime.connect({name: "from_websocket"});
+            myPort.postMessage(request);
+            break;
 
-		case 'to_websocket':
+        case 'open_websocket':
 
-			var myPort = browser.runtime.connect({name: "from_websocket"});
-			myPort.postMessage(request);
-			break;
+            myPort = browser.runtime.connect({name: "from_websocket"});
+            myPort.postMessage(request);
+    }
 
-		case 'open_websocket':
+    // if (sender.url != browser.runtime.getURL("/pages/panel.html"))
+    // {
+    // 	return;
+    // }
 
-			var myPort = browser.runtime.connect({name: "from_websocket"});
-			myPort.postMessage(request);
-			break;
-	}
-	if (sender.url != browser.runtime.getURL("/pages/panel.html"))
-	{
-		return;
-	}
-
-
-	browser.tabs.executeScript(
-		request.tabId,
-		{
-			code: request.script
-		});
+    // browser.tabs.executeScript(
+    //     sender.tab.id,
+    //     {
+    //         code: request.script
+    //     });
 
 }
 

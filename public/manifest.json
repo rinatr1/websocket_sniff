@@ -1,7 +1,7 @@
 {
 
   "manifest_version": 2,
-  "name": "WebSocketSniff",
+  "name": "WebSocketSniff (fork)",
   "version": "0.2",
   "author": "Rinat",
   "homepage_url": "https://hellosite.org",

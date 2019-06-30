@@ -1,12 +1,14 @@
 
+// activated when user opens Tab
 function handleShown()
 {
-
+  console.log("handleShown");
 }
 
+// activated when user closes Tab
 function handleHidden()
 {
-
+  console.log("handleHidden");
 }
 
 
@@ -30,6 +32,7 @@ browser.devtools.panels.create(
 function listener(request, sender, sendResponse)
 {
 
+  console.log("111ddd---")
 
 }
 

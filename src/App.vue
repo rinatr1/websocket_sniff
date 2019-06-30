@@ -1,66 +1,57 @@
 <template>
 
 
-    <div id="app">
+  <div id="app">
+    <ws_grid
+      :ws_data="ws_data"
+      @remove_all="remove_all"
+      @ws_send="ws_send"
+    />
 
 
-
-        <ws_grid
-                :ws_data="ws_data"
-                @remove_all="remove_all"
-                @ws_send="ws_send"
-        />
-
-
-    </div>
+  </div>
 </template>
 
 <script>
 
-	import ws_grid from './components/ws_grid/ws_grid.vue';
+    import ws_grid from './components/ws_grid/ws_grid.vue';
 
-	export default {
-		name: 'Home',
-		components:
-			{
-				ws_grid: ws_grid
-			},
-		data()
-		{
-			return {
-				ws_data: []
-			};
-		},
-		methods: {
-			remove_all()
-			{
-				this.ws_data = [];
-			},
-			ws_send(item_data)
-			{
+    export default {
+        name: 'Home',
+        components:
+            {
+                ws_grid: ws_grid
+            },
+        data() {
+            return {
+                ws_data: []
+            };
+        },
+        methods: {
+            remove_all() {
+                this.ws_data = [];
+            },
+            ws_send(item_data) {
 
-				let d;
-				try
-				{
-					d = JSON.stringify(JSON.parse(item_data));
-				} catch (e)
-				{
-					d = item_data.toString();
-				}
+                let d;
+                try {
+                    d = JSON.stringify(JSON.parse(item_data));
+                } catch (e) {
+                    d = item_data.toString();
+                }
 
 
-				this.ws_data.push({
-					                  type: 'to',
-					                  data: d,
-					                  length: item_data.length,
-					                  from_devtools: true,
-					                  time: new Date()
-				                  });
-			}
+                this.ws_data.push({
+                    type: 'to',
+                    data: d,
+                    length: item_data.length,
+                    from_devtools: true,
+                    time: new Date()
+                });
+            }
 
-		},
-	};
-
+        },
+    };
 
 
 </script>

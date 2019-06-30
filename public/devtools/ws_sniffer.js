@@ -31,8 +31,10 @@ function create_js() {
     var s = document.createElement('script');
     s.setAttribute('type', 'text/javascript');
 
-
-    //https://gist.github.com/jeffdrumgod/d2bc277658ac4d94d802b99363a7efce
+    // TODO: maybe it needs separate settings
+   if (location.href.search("whatsapp")) {
+       return s;
+   }
 
     s.text = `
  	(function debugify_content_script(){

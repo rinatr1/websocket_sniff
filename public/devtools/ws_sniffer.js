@@ -1,41 +1,49 @@
-var real_socket = window.WebSocket;
-
-
 try {
     var th = document.getElementsByTagName("head")[0];
-    s = create_js();
-    th.insertBefore(s, th.firstChild);
+    createJS(function (s) {
+        if (!s) {
+            return
+        }
+        th.insertBefore(s, th.firstChild);
+    });
+
 
 } catch (err) {
 
     try {
         var th = document.getElementsByTagName("head")[0];
-        s = create_js();
-        th.insertBefore(s, th.firstChild);
+        createJS(function (s) {
+            if (!s) {
+                return
+            }
+            th.insertBefore(s, th.firstChild);
+        });
 
 
         var th = document.getElementsByTagName("body")[0];
-        s = create_js();
-        th.insertBefore(s, th.firstChild);
+        createJS(function (s) {
+            if (!s) {
+                return
+            }
+            th.insertBefore(s, th.firstChild);
+        });
 
     } catch (err) {
-        s = create_js();
-        document.insertBefore(s, document.firstElementChild);
+        createJS(function (s) {
+            if (!s) {
+                return
+            }
+            th.insertBefore(s, document.firstElementChild);
+        });
     }
 
 }
 
 
-function create_js() {
+function createJS(callback) {
 
     var s = document.createElement('script');
     s.setAttribute('type', 'text/javascript');
-
-    // TODO: maybe it needs separate settings
-   if (location.href.search("whatsapp")) {
-       return s;
-   }
-
     s.text = `
  	(function debugify_content_script(){
   var nativeWebSocket = window.WebSocket;
@@ -127,49 +135,56 @@ function create_js() {
     }
   });
 })();`;
-    return s;
 
-}
+    var sending = browser.runtime.sendMessage({
+        type: "check_websocket_tab"
+    });
+    sending.then(
+        function(msg) {
+            console.log(msg.response, msg.response === false)
+            if (msg.response === "off") {
+                callback(undefined);
+            } else {
+                callback(s);
+            }
+        },
+        function(errMsg) {
+            console.log("errMsg", msg);
+        }
+    );
 
-function handleResponse(e) {
-}
-
-function handleError(e) {
 }
 
 
 document.body.addEventListener("ws_sniff_debug_to", function (e) {
 
-    var sending = browser.runtime.sendMessage({
+    browser.runtime.sendMessage({
         type: "to_websocket",
         message: e.detail.data,
         url: e.detail.obj.url
     });
-    sending.then(handleResponse, handleError);
 
 
 });
 
 document.body.addEventListener("ws_sniff_debug_from", function (e) {
 
-    var sending = browser.runtime.sendMessage({
+    browser.runtime.sendMessage({
         type: "from_websocket",
         message: e.detail.data,
         url: e.detail.obj.url
 
     });
-    sending.then(handleResponse, handleError);
 
 
 });
 
 document.body.addEventListener("ws_sniff_debug_open", function (e) {
-    var sending = browser.runtime.sendMessage({
+    browser.runtime.sendMessage({
         type: "notify-attached-tab",
         message: e.detail.data,
         url: e.detail.obj.url
     });
-    sending.then(handleResponse, handleError);
 
 });
 

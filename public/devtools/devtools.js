@@ -1,11 +1,15 @@
 // activated when user opens Tab
 function handleShown() {
-    console.log("handleShown");
+    browser.runtime.sendMessage({
+        type: "open_websocket_tab"
+    });
 }
 
 // activated when user closes Tab
 function handleHidden() {
-    console.log("handleHidden");
+    browser.runtime.sendMessage({
+        type: "close_websocket_tab"
+    });
 }
 
 
@@ -25,9 +29,6 @@ browser.devtools.panels.create(
 
 
 function listener(request, sender, sendResponse) {
-
-    console.log("111ddd---")
-
 }
 
 

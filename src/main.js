@@ -12,7 +12,6 @@ window.app = new Vue({
 
 
 function connected(p) {
-    console.log("connected");
     p.onMessage.addListener(function (m) {
 
         new_data({

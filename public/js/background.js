@@ -13,27 +13,28 @@ function handleMessage(request, sender, sendResponse) {
 
         case 'to_websocket':
 
-            myPort = browser.runtime.connect({name: "from_websocket"});
+            myPort = browser.runtime.connect({name: "to_websocket"});
             myPort.postMessage(request);
             break;
 
         case 'open_websocket':
 
-            myPort = browser.runtime.connect({name: "from_websocket"});
+            myPort = browser.runtime.connect({name: "open_websocket"});
             myPort.postMessage(request);
+            break;
+
+        case 'open_websocket_tab':
+            window.localStorage.setItem("is_open_tab", "on");
+            break;
+
+        case 'close_websocket_tab':
+            window.localStorage.setItem("is_open_tab", "off");
+            break;
+
+        case 'check_websocket_tab':
+            sendResponse({response: window.localStorage.getItem("is_open_tab")});
+            break;
     }
-
-    // if (sender.url != browser.runtime.getURL("/pages/panel.html"))
-    // {
-    // 	return;
-    // }
-
-    // browser.tabs.executeScript(
-    //     sender.tab.id,
-    //     {
-    //         code: request.script
-    //     });
-
 }
 
 

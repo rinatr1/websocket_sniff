@@ -136,12 +136,14 @@ function createJS(callback) {
   });
 })();`;
 
+    // TODO: url need send
     var sending = browser.runtime.sendMessage({
-        type: "check_websocket_tab"
+        type: "check_websocket_tab",
+        url: location.href
     });
     sending.then(
         function(msg) {
-            if (msg.response === "off") {
+            if (msg.response === "off" || msg.response === null) {
                 callback(undefined);
             } else {
                 callback(s);

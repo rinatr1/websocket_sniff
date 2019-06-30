@@ -3,6 +3,7 @@
  tab.
  */
 function handleMessage(request, sender, sendResponse) {
+    // TODO: url need check, because will be showed all messages
     switch (request.type) {
         case 'from_websocket':
             var myPort = browser.runtime.connect({name: "from_websocket"});
@@ -30,6 +31,7 @@ function handleMessage(request, sender, sendResponse) {
             break;
 
         case 'check_websocket_tab':
+            // TODO: url need check
             sendResponse({response: window.localStorage.getItem("is_open_tab")});
             break;
     }

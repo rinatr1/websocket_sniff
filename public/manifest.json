@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "WebSocketSniff",
-  "version": "0.2",
-  "author": "Rinat",
-  "homepage_url": "https://hellosite.org",
+  "name": "WebSocketSniff (fork)",
+  "version": "0.0.1",
+  "author": "Artem Kislneko",
+  "homepage_url": "https://github.com/kislenko-artem",
   "description": "Sniff websocket frames",
   "icons": {
     "48": "icons/websocket_50.png",
@@ -12,7 +12,7 @@
   },
   "applications": {
     "gecko": {
-      "id": "hello@hellosite.org",
+      "id": "artem@webart-tech.ru",
       "strict_min_version": "45.0"
     }
   },

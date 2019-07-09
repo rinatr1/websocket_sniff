@@ -2,42 +2,39 @@
  When we receive the message, execute the given script in the given
  tab.
  */
-function handleMessage(request, sender, sendResponse)
-{
+function handleMessage(request, sender, sendResponse) {
+    // TODO: url need check, because will be showed all messages
+    switch (request.type) {
+        case 'from_websocket':
+            var myPort = browser.runtime.connect({name: "from_websocket"});
+            myPort.postMessage(request);
+            break;
 
+        case 'to_websocket':
 
-	switch (request.type)
-	{
-		case 'from_websocket':
+            var myPort = browser.runtime.connect({name: "to_websocket"});
+            myPort.postMessage(request);
+            break;
 
-			var myPort = browser.runtime.connect({name: "from_websocket"});
-			myPort.postMessage(request);
-			break;
+        case 'open_websocket':
 
-		case 'to_websocket':
+            var myPort = browser.runtime.connect({name: "open_websocket"});
+            myPort.postMessage(request);
+            break;
 
-			var myPort = browser.runtime.connect({name: "from_websocket"});
-			myPort.postMessage(request);
-			break;
+        case 'open_websocket_tab':
+            window.localStorage.setItem("is_open_tab", "on");
+            break;
 
-		case 'open_websocket':
+        case 'close_websocket_tab':
+            window.localStorage.setItem("is_open_tab", "off");
+            break;
 
-			var myPort = browser.runtime.connect({name: "from_websocket"});
-			myPort.postMessage(request);
-			break;
-	}
-	if (sender.url != browser.runtime.getURL("/pages/panel.html"))
-	{
-		return;
-	}
-
-
-	browser.tabs.executeScript(
-		request.tabId,
-		{
-			code: request.script
-		});
-
+        case 'check_websocket_tab':
+            // TODO: url need check
+            sendResponse({response: window.localStorage.getItem("is_open_tab")});
+            break;
+    }
 }
 
 

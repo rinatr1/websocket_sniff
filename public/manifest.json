@@ -1,41 +1,42 @@
 {
-
   "manifest_version": 2,
-  "name": "WebSocketSniff",
-  "version": "0.2",
-  "author": "Rinat",
-  "homepage_url": "https://hellosite.org",
+  "name": "WebSocketSniff (fork)",
+  "version": "0.0.1",
+  "author": "Artem Kislneko",
+  "homepage_url": "https://github.com/kislenko-artem",
   "description": "Sniff websocket frames",
   "icons": {
     "48": "icons/websocket_50.png",
     "64": "icons/websocket_64.png",
     "128": "icons/websocket_128.png"
   },
-
   "applications": {
     "gecko": {
-      "id": "hello@hellosite.org",
+      "id": "artem@webart-tech.ru",
       "strict_min_version": "45.0"
     }
   },
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": [
+      "js/background.js"
+    ]
   },
-
   "permissions": [
     "webRequest",
     "<all_urls>",
     "webRequestBlocking"
   ],
-
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["devtools/ws_sniffer.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "devtools/ws_sniffer.js"
+      ],
       "run_at": "document_end"
     }
   ],
-
   "devtools_page": "devtools/devtools-page.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 }

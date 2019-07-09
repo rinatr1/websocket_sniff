@@ -1,26 +1,15 @@
-# websocket_tools
 
-## Project setup
-```
-npm install
-```
+###  Fork from: 
+`https://github.com/rinatr1/websocket_sniff`
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+For staring:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+1. `npm install`
+2. `npm run build`
+3. Start Firefox, go on `about:debugging`, add folder `dist` as Temporary Extensions
+	(more [Your first extension](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension))
 
-### Lints and fixes files
-```
-npm run lint
-```
+Issues:
 
-### Run your unit tests
-```
-npm run test:unit
-```
+* There is no checking for host, tab shows all messages from all websocket connections
+* If you open tab on one site, and switch on another code for listening websocket will be added on the site.
